@@ -71,27 +71,24 @@ def get_day_of_year(day, month, year):
 # @param offset - Number, day count of offset (any integer number with any sign) 
 # @return Number
 def get_week_day_with_offset(start_day, offset):
-  return start_day + offset % 7
+  return (start_day + offset % 7) % 7
 
-# Get week day number of a month first day of a year
+# Get week day number of any day
+# @param day - Number, number of a day in a month
+# @param month - Number, month's number (from 0 up to 11 included)
 # @param year - Number, full year
 # @return Number
-def get_week_day_of_first_day_of_month(year, month):
+def get_week_day(day, month, year):
   day_count = 0
   start_year = min(year, BEGIN_YEAR)
   end_year = max(year, BEGIN_YEAR)
   for y in range(start_year, end_year):
     day_count += get_year_day_count(start_year + y)
-
-
-    
-  return (day_count + get_day_of_year(1, month, y)) % 7
-
-# Get week day number of a year
-# @param day - Number, number of a day in a month
-# @param month - Number, month's number (from 0 up to 11 included)
-# @param year - Number, full year
-# @return Number
-# def get_week_day(day, month, year):
+  if year >= BEGIN_YEAR:
+    day_count += get_day_of_year(day, month, year)
+    return get_week_day_with_offset(BEGIN_DAY, day_count - 1)
+  else:
+    day_count -= get_day_of_year(day, month, year)
+    return get_week_day_with_offset(BEGIN_DAY, -1 * (day_count + 1))
   
-print(WEEK["RU"][get_week_day_with_offset(WEEK_NUMBER["TUE"], 19)])
+print(WEEK["RU"][get_week_day(1, MONTH_NUMBER["JAN"], 2025)])
