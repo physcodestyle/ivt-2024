@@ -1,17 +1,12 @@
-from config.constants import LANGUAGES, MONTHS, MONTH_NUMBER, WEEK, WEEK_NUMBER, BEGIN_DAY, BEGIN_YEAR, LEAP_YEAR, BEGIN_DATE
-from modules.types import OwnDate, get_day_num, get_month_num, get_month_abr, get_year_num
+from config.constants import MONTH_NUMBER, WEEK_NUMBER, BEGIN_DAY, LEAP_YEAR, BEGIN_DATE
+from modules.types import OwnDate, get_day_num, get_month_num, get_year_num
 
 # Get leap year or not
-# @param year - Number, full year
-# @return Boolean
-def is_leap_year(year) -> bool:
+def is_leap_year(year: int) -> bool:
   return abs(year - LEAP_YEAR) % 4 == 0
 
 
 # Get count of month's days
-# @param month_abr - String, first month's three symbols in uppercase
-# @param year - Number, full year
-# @return Number
 def get_month_day_count(month_abr: str, year: int) -> int:
   big_month_numbers = [ 0, 2, 4, 6, 7, 9, 11 ]
   if MONTH_NUMBER[month_abr] == 1:
@@ -57,12 +52,7 @@ def get_week_day(date: OwnDate) -> int:
 
 
 # Get week number of a year
-# @param day - Number, number of a day in a month
-# @param month_abr - String, first month's three symbols in uppercase
-# @param year - Number, full year
-# @return Number
 def get_week_of_year(day: int, month_abr: str, year: int) -> int:
   day_number = get_day_of_year(day, MONTH_NUMBER[month_abr], year)
   day_number_without_first_week = day_number - (7 - get_week_day(1, MONTH_NUMBER["JAN"], year))
   return day_number_without_first_week // 7 + 2
-
