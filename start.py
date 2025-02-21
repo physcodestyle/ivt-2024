@@ -30,11 +30,13 @@ LEAP_YEAR = 1972
 
 MIN_INTERVAL = 1
 
+
 # Get leap year or not
 # @param year - Number, full year
 # @return Boolean
 def is_leap_year(year):
   return abs(year - LEAP_YEAR) % 4 == 0
+
 
 # Get count of month's days
 # @param month - Number, month's number (from 0 up to 11 included)
@@ -49,11 +51,13 @@ def get_month_day_count(month, year):
   else:
     return 30
 
+
 # Get count of year's days
 # @param year - Number, full year
 # @return Number
 def get_year_day_count(year):
   return 365 + (1 if is_leap_year(year) else 0)
+
 
 # Get day number of a year
 # @param day - Number, number of a day in a month
@@ -66,12 +70,14 @@ def get_day_of_year(day, month, year):
     output_day += get_month_day_count(m, year)
   return output_day
 
+
 # Get week day number with offset
 # @param start_day - Number, day number of a week (from 0 up to 6 included)
 # @param offset - Number, day count of offset (any integer number with any sign) 
 # @return Number
 def get_week_day_with_offset(start_day, offset):
   return (start_day + offset % 7) % 7
+
 
 # Get week day number of any day
 # @param day - Number, number of a day in a month
@@ -90,5 +96,16 @@ def get_week_day(day, month, year):
   else:
     day_count -= get_day_of_year(day, month, year)
     return get_week_day_with_offset(BEGIN_DAY, -1 * (day_count + 1))
-  
-print(WEEK["RU"][get_week_day(1, MONTH_NUMBER["JAN"], 2025)])
+
+
+# Get week number of a year
+# @param day - Number, number of a day in a month
+# @param month - Number, month's number (from 0 up to 11 included)
+# @param year - Number, full year
+# @return Number
+def get_week_of_year(day, month, year):
+  day_number = get_day_of_year(day, month, year)
+  day_number_without_first_week = day_number - (7 - get_week_day(1, MONTH_NUMBER["JAN"], year))
+  return day_number_without_first_week // 7 + 2
+
+print(get_week_of_year(21, MONTH_NUMBER["FEB"], 2025))
