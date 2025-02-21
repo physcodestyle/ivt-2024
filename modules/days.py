@@ -1,6 +1,7 @@
 from config.constants import MONTH_NUMBER, WEEK_NUMBER, BEGIN_DAY, LEAP_YEAR, BEGIN_DATE
 from modules.types import OwnDate, get_day_num, get_month_num, get_year_num
 
+
 # Get leap year or not
 def is_leap_year(year: int) -> bool:
   return abs(year - LEAP_YEAR) % 4 == 0
@@ -33,6 +34,7 @@ def get_day_of_year(date: OwnDate) -> int:
 # Get week day number with offset
 def get_week_day_with_offset(start_day_abr: str, offset: int) -> int:
   return (WEEK_NUMBER[start_day_abr] + offset % 7) % 7
+
 
 # Get day count between two dates
 def get_interval_in_days(start: OwnDate, end: OwnDate) -> int:
