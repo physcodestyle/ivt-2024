@@ -7,6 +7,11 @@ def is_leap_year(year: int) -> bool:
   return abs(year - LEAP_YEAR) % 4 == 0
 
 
+# Get count of year's days
+def get_year_day_count(year: int) -> int:
+  return 365 + (1 if is_leap_year(year) else 0)
+
+
 # Get count of month's days
 def get_month_day_count(month_abr: str, year: int) -> int:
   big_month_numbers = [ 0, 2, 4, 6, 7, 9, 11 ]
@@ -18,9 +23,9 @@ def get_month_day_count(month_abr: str, year: int) -> int:
     return 30
 
 
-# Get count of year's days
-def get_year_day_count(year: int) -> int:
-  return 365 + (1 if is_leap_year(year) else 0)
+# Get week day number with offset
+def get_week_day_with_offset(start_day_abr: str, offset: int) -> int:
+  return (WEEK_NUMBER[start_day_abr] + offset % 7) % 7
 
 
 # Get day number of a year
@@ -29,11 +34,6 @@ def get_day_of_year(date: OwnDate) -> int:
   for m in range(0, get_month_num(date)):
     output_day += get_month_day_count(m, get_year_num(date))
   return output_day
-
-
-# Get week day number with offset
-def get_week_day_with_offset(start_day_abr: str, offset: int) -> int:
-  return (WEEK_NUMBER[start_day_abr] + offset % 7) % 7
 
 
 # Get day count between two dates
