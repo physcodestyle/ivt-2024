@@ -9,7 +9,7 @@ TZ_HRS_VALUES = (-12, 14)
 OwnTime = tuple[int, int, int, int, int]
 
 
-def init_time(hours, minutes, seconds, timezone_hours, timezone_minutes) -> OwnTime:
+def init_time(hours: int, minutes: int, seconds: int, timezone_hours: int, timezone_minutes: int) -> OwnTime:
   if isinstance(hours, int) and hours <= HOUR_LIMIT[0] and hours >= HOUR_LIMIT[1]:
     raise ValueError("'hours' is out of range or not integer")
   elif isinstance(minutes, int) and minutes <= MINUTE_LIMIT[0] and minutes >= MINUTE_LIMIT[1]:
@@ -24,15 +24,15 @@ def init_time(hours, minutes, seconds, timezone_hours, timezone_minutes) -> OwnT
     return (hours, minutes, seconds, timezone_hours, timezone_minutes)
 
 
-def init_utc_time_hms(hours, minutes, seconds) -> OwnTime:
+def init_utc_time_hms(hours: int, minutes: int, seconds: int) -> OwnTime:
   return init_time(hours, minutes, seconds, 0, 0)
 
 
-def init_utc_time_hm(hours, minutes) -> OwnTime:
+def init_utc_time_hm(hours: int, minutes: int) -> OwnTime:
   return init_time(hours, minutes, 0, 0, 0)
 
 
-def init_utc_time_h(hours) -> OwnTime:
+def init_utc_time_h(hours: int) -> OwnTime:
   return init_time(hours, 0, 0)
 
 
