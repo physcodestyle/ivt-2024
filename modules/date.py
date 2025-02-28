@@ -1,5 +1,5 @@
-from config.constants import MONTH_NUMBER, WEEK_NUMBER, BEGIN_DAY, LEAP_YEAR, BEGIN_DATE
-from modules.types import OwnDate, get_day_num, get_month_num, get_year_num
+from config.constants import BEGIN_DAY, LEAP_YEAR, BEGIN_DATE
+from modules.own_date import OwnDate, get_day_num, get_week_day_num, get_month_num, get_year_num
 
 
 # Get leap year or not
@@ -15,9 +15,9 @@ def get_year_day_count(year: int) -> int:
 # Get count of month's days
 def get_month_day_count(month_abr: str, year: int) -> int:
   big_month_numbers = [ 0, 2, 4, 6, 7, 9, 11 ]
-  if MONTH_NUMBER[month_abr] == 1:
+  if get_month_num(month_abr) == 1:
     return 28 + (1 if is_leap_year(year) else 0)
-  elif MONTH_NUMBER[month_abr] in big_month_numbers:
+  elif get_month_num(month_abr) in big_month_numbers:
     return 31
   else:
     return 30
@@ -25,7 +25,7 @@ def get_month_day_count(month_abr: str, year: int) -> int:
 
 # Get week day number with offset
 def get_week_day_with_offset(start_day_abr: str, offset: int) -> int:
-  return (WEEK_NUMBER[start_day_abr] + offset % 7) % 7
+  return (get_week_day_num(start_day_abr) + offset % 7) % 7
 
 
 # Get day number of a year

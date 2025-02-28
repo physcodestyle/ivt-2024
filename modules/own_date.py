@@ -1,4 +1,5 @@
-from config.constants import MONTH_NUMBER
+MONTHS = [ "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC" ]
+WEEK = [ "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN" ]
 
 # Tuple [day_count, month_abbr, year]
 OwnDate = tuple[int, str, int]
