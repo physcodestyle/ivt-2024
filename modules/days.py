@@ -54,7 +54,8 @@ def get_week_day(date: OwnDate) -> int:
 
 
 # Get week number of a year
-def get_week_of_year(day: int, month_abr: str, year: int) -> int:
-  day_number = get_day_of_year(day, MONTH_NUMBER[month_abr], year)
-  day_number_without_first_week = day_number - (7 - get_week_day(1, MONTH_NUMBER["JAN"], year))
+def get_week_of_year(date: OwnDate) -> int:
+  day_number = get_day_of_year(date)
+  first_day_of_current_year = (1, date[1], date[2])
+  day_number_without_first_week = day_number - (7 - get_week_day(first_day_of_current_year))
   return day_number_without_first_week // 7 + 2
