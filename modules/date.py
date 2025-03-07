@@ -59,3 +59,9 @@ def get_week_of_year(date: OwnDate) -> int:
   first_day_of_current_year = (1, date[1], date[2])
   day_number_without_first_week = day_number - (7 - get_week_day(first_day_of_current_year))
   return day_number_without_first_week // 7 + 2
+
+
+# Get amount of seconds of date's 00:00:00 from BEGIN_DATE's 00:00:00
+def get_midnight_seconds(date: OwnDate) -> int:
+  day_count = get_interval_in_days(BEGIN_DATE, date)
+  return SECONDS_IN_24H * day_count
