@@ -1,4 +1,4 @@
-from config.constants import BEGIN_DAY, LEAP_YEAR, BEGIN_DATE
+from config.constants import BEGIN_DAY, LEAP_YEAR, BEGIN_DATE, SECONDS_IN_24H
 from modules.own_date import OwnDate, get_day_num, get_week_day_num, get_month_num, get_year_num
 
 
