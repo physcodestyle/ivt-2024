@@ -1,6 +1,7 @@
 LANGUAGES = [ "EN", "FR","RU" ]
 
 # Months lists
+MONTH_ABRS = [ "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC" ]
 MONTHS_RU = [ "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" ]
 MONTHS_EN = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]
 MONTHS_FR = [ "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre" ]
@@ -11,6 +12,7 @@ MONTHS = {
 }
 
 # Weeks list
+WEEK_DAY_ABRS = [ "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN" ]
 WEEK_RU = [ "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье" ]
 WEEK_EN = [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" ]
 WEEK_FR = [ "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche" ]
