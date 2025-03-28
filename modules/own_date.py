@@ -25,6 +25,10 @@ def get_week_day_num(week_abr) -> int:
   return WEEK_DAY_ABRS.index(week_abr)
 
 
+def get_week_day_abr(week_num) -> str:
+  return WEEK_DAY_ABRS[week_num]
+
+
 def get_month_num(date: OwnDate) -> int:
   return MONTH_ABRS.index(date[1])
 

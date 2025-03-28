@@ -1,5 +1,5 @@
 from config.constants import BEGIN_DAY, LEAP_YEAR, BEGIN_DATE, SECONDS_IN_24H, MONTH_ABRS, WEEK_DAY_ABRS
-from modules.own_date import OwnDate, init_date, init_date_with_month_num, get_day_num, get_week_day_num, get_month_num, get_month_num_from_abr, get_month_abr_from_num, get_month_abr, get_year_num
+from modules.own_date import OwnDate, init_date, init_date_with_month_num, get_day_num, get_week_day_num, get_week_day_abr, get_month_num, get_month_num_from_abr, get_month_abr_from_num, get_month_abr, get_year_num
 
 
 # Get leap year or not
@@ -42,9 +42,9 @@ def get_interval_in_days(start: OwnDate, end: OwnDate) -> int:
   start_year = min(get_year_num(start), get_year_num(end))
   end_year = max(get_year_num(start), get_year_num(end))
   for y in range(start_year, end_year):
-    day_count += get_year_day_count(start_year + y)
+    day_count += get_year_day_count(y)
   day_count += get_day_of_year(end) - get_day_of_year(start)
-  return day_count - 1 if get_year_num(end) >= get_year_num(start) else -1 * day_count
+  return day_count if get_year_num(end) >= get_year_num(start) else -1 * day_count
 
 
 # Get week day number of any day
@@ -156,7 +156,7 @@ def get_month_of_date(date: OwnDate) -> tuple[tuple[int]]:
   while current_month_offset == 0:
     month.append(get_week_of_date(day_of_month))
     day_of_month, current_month_offset = add_days_offset(day_of_month, 7)
-  day_of_month, current_month_offset = add_days_offset(day_of_month, -6)
+  day_of_month, current_month_offset = add_days_offset(day_of_month, -1 * get_week_day(day_of_month))
   if current_month_offset == -1:
     month.append(get_week_of_date(day_of_month))
   return tuple(month)
