@@ -140,9 +140,8 @@ def get_week_of_date(date: OwnDate) -> tuple[int]:
       else:
         week.append(0)
   else:
-    first_day_count_of_previous_month = get_month_day_count(get_month_abr(first_day_of_current_week), get_year_num(first_day_of_current_week))
     transition_interval = get_interval_in_days(date, first_day_of_current_week)
-    for d in range(transition_interval, get_day_num(date), 1):
+    for d in range(transition_interval, get_day_num(date) + 1, 1):
       if d + 1 <= 0:
         week.append(0)
       else:
