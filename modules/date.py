@@ -139,9 +139,15 @@ def get_week_of_date(date: OwnDate) -> tuple[int]:
         week.append(d)
       else:
         week.append(0)
-  else:
+  elif month_offset < 0:
     transition_interval = get_interval_in_days(date, first_day_of_current_week)
-    for d in range(transition_interval, get_day_num(date) + 1, 1):
+    for d in range(transition_interval, 0):
+      week.append(0)
+    for d in range(len(WEEK_DAY_ABRS) + transition_interval):
+      week.append(d + 1)
+  elif month_offset > 0:
+    transition_interval = get_interval_in_days(date, first_day_of_current_week)
+    for d in range(transition_interval, current_week_day + 1, 1):
       if d + 1 <= 0:
         week.append(0)
       else:
@@ -160,4 +166,24 @@ def get_month_of_date(date: OwnDate) -> tuple[tuple[int]]:
   if current_month_offset == -1:
     month.append(get_week_of_date(day_of_month))
   return tuple(month)
-    
+
+
+def get_nearest_three_months(date: OwnDate) -> tuple[tuple[tuple[int]]]:
+  quarter = []
+  previous_date, _ = add_month_offset(date, -1)
+  next_date, _ = add_month_offset(date, 1)
+  previous_month = get_month_of_date(previous_date)
+  current_month = get_month_of_date(date)
+  next_month = get_month_of_date(next_date)
+  previous_month_week_count = len(previous_month)
+  current_month_week_count = len(current_month)
+  next_month_week_count = len(next_month)
+  empty_week = tuple([0 for _ in range(len(WEEK_DAY_ABRS))])
+  for i in range(max(previous_month_week_count, current_month_week_count, next_month_week_count)):
+    quarter.append((
+      previous_month[i] if i < previous_month_week_count else empty_week,
+      current_month[i] if i < current_month_week_count else empty_week,
+      next_month[i] if i < next_month_week_count else empty_week,
+    ))
+  return tuple(quarter)
+
