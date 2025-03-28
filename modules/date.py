@@ -116,8 +116,15 @@ def add_days_offset(current_date: OwnDate, interval_in_days: int) -> tuple[OwnDa
     return new_date, get_month_num(new_date) - get_month_num(current_date)
 
 
-# Get current week days (0 if empty day)
 def get_week_of_date(date: OwnDate) -> tuple[int]:
+  """Get week dates of the requested day
+
+  Args:
+    date (OwnDate): date of requested day
+  
+  Returns:
+    Tuple[int]: a set of week dates of the requested day (if week contains dates from other month the value will be `0`)
+  """
   current_month = get_month_abr(date)
   current_year = get_year_num(date)
   current_week_day = get_week_day(date)
@@ -141,3 +148,17 @@ def get_week_of_date(date: OwnDate) -> tuple[int]:
       else:
         week.append(d + 1)
   return tuple(week)
+
+
+def get_month_of_date(date: OwnDate) -> tuple[tuple[int]]:
+  month = []
+  day_of_month = init_date(1, get_month_abr(date), get_year_num(date))
+  current_month_offset = 0
+  while current_month_offset == 0:
+    month.append(get_week_of_date(day_of_month))
+    day_of_month, current_month_offset = add_days_offset(day_of_month, 7)
+  day_of_month, current_month_offset = add_days_offset(day_of_month, -6)
+  if current_month_offset == -1:
+    month.append(get_week_of_date(day_of_month))
+  return tuple(month)
+    
