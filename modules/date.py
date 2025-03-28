@@ -155,7 +155,7 @@ def get_month_of_date(date: OwnDate) -> tuple[tuple[int]]:
   current_month_offset = 0
   while current_month_offset == 0:
     month.append(get_week_of_date(day_of_month))
-    day_of_month, current_month_offset = add_days_offset(day_of_month, 7)
+    day_of_month, current_month_offset = add_days_offset(day_of_month, len(WEEK_DAY_ABRS))
   day_of_month, current_month_offset = add_days_offset(day_of_month, -1 * get_week_day(day_of_month))
   if current_month_offset == -1:
     month.append(get_week_of_date(day_of_month))
